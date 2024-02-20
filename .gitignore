@@ -1,0 +1,6 @@
+/my_env\
+my_env\
+\my_env\
+.gitattributes
+*.pyc
+*.pyc
