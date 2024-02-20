@@ -7,8 +7,6 @@ Using the standard HTTP video stream, a client code can be very simple and quick
 
 &nbsp;
 
-<div align="center"><img src="docs/preview.png" width="800"></div>
-
 &nbsp;
 
 ## Dependencies
