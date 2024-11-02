@@ -2,12 +2,18 @@
 # Brian Lesko 
 # 2/19/2024
 # Serve a video stream from a webcam using OpenCV and Python's http.server
+
 import http.server
 import socketserver
 import cv2
 import io
+import socket
 
 PORT = 8000
+
+# Get the system's IP address dynamically
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
 
 class VideoStreamHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
@@ -35,6 +41,11 @@ class VideoStreamHandler(http.server.BaseHTTPRequestHandler):
             print("Stream stopped:", e)
         finally:
             cap.release()
+
+Handler = VideoStreamHandler
+with http.server.ThreadingHTTPServer((local_ip, PORT), Handler) as httpd:
+    print("Serving at IP", local_ip, "and port", PORT)
+    httpd.serve_forever()
 
 Handler = VideoStreamHandler
 with http.server.ThreadingHTTPServer(("192.168.1.150", PORT), Handler) as httpd:
